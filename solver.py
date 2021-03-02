@@ -1,6 +1,7 @@
 import problem
 import solution
 import time
+import frpamplmipsolver as solver_ampl
 
 
 class Solver:
@@ -41,6 +42,7 @@ class Solver:
 
         # Boucle d'exécution
         while(self._continue()):
+            solver_ampl.FrpAmplMipSolver.solve()
             # TODO Coder la boucle d'exécution ici à la place de pass
             pass
 
