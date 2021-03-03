@@ -1,7 +1,8 @@
-import solver 
 import fastroute_problem as frp
-import amplpy
+import solver 
 import os
+import amplpy
+
 from importlib import reload
 reload(solver)
 
@@ -9,8 +10,8 @@ class FrpAmplMipSolver(solver.Solver):
 
     def __init__(self):
         super(FrpAmplMipSolver, self).__init__()
-        self.prob = frp.FastRouteProb
-        self.matrix = frp.FastRouteProb.__str__(self.prob())
+        self.problem = frp.FastRouteProb
+        self.matrice = frp.FastRouteProb.__str__(self.problem())
         pass
 
     def solve(self, prob=None):
@@ -37,7 +38,7 @@ class FrpAmplMipSolver(solver.Solver):
             df = amplpy.DataFrame(('start','end'), 'dst')
 
             df.setValues({
-                (start, end): self.matrix[i][j]
+                (start, end): self.matrice[i][j]
                 for i, start in enumerate(starts)
                 for j, end in enumerate(ends)})
 
@@ -48,10 +49,10 @@ class FrpAmplMipSolver(solver.Solver):
 
             print('Objective: {}'.format(ampl.getObjective('Total_Cost').value()))
             solution = ampl.getVariable('Buy').getValues()
-            print('Solution: \n' + str(solution))
+            print('Solution retournée: \n' + str(solution))
 
-        except Exception as e:
-            print(e)
+        except Exception as except:
+            print(except)
             raise
 
 
