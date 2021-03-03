@@ -19,7 +19,7 @@ class FrpAmplMipSolver(solver.Solver):
             ampl_env = amplpy.Environment()
             ampl = amplpy.AMPL(ampl_env)
 
-            ampl.set0ption('solver', 'gurobi')
+            ampl.setOption('solver', 'gurobi')
 
             model_dir = os.path.normpath('./ampl_models')
             ampl.read(os.path.join(model_dir, 'Question2.mod'))
