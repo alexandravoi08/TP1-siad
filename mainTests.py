@@ -1,5 +1,7 @@
 import fastroute_problem as frp
 import route_solution as rsol
+import frpamplmipsolver as ampl_solver
+
 
 #Section FastRouteProb
 
