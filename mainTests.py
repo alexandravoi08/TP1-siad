@@ -1,6 +1,6 @@
 import fastroute_problem as frp
 import route_solution as rsol
-import frpamplmipsolver as ampl_solver
+import frp_rand_solver as frprs
 
 
 #Section FastRouteProb
