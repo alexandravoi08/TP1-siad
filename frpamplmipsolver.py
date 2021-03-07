@@ -12,7 +12,6 @@ class FrpAmplMipSolver(solver.Solver):
         super(FrpAmplMipSolver, self).__init__()
         self.problem = frp.FastRouteProb
         self.matrice = frp.FastRouteProb.__str__(self.problem())
-        pass
 
     def solve(self, prob=None):
         try:
@@ -22,25 +21,25 @@ class FrpAmplMipSolver(solver.Solver):
             ampl.setOption('solver', 'gurobi')
 
             model_dir = os.path.normpath('./ampl_models')
-            ampl.read(os.path.join(model_dir, 'Question2.mod'))
+            ampl.read(os.path.join(model_dir, '/ampl_m.mod'))
 
-            starts=['1','2','3','4']
-            ends=['1','2','3','4']
+            departs=['1','2','3','4']
+            arrivees=['1','2','3','4']
 
-            df = amplpy.DataFrame('start')
-            df.setColumn(self,'start')
-            ampl.setData(df, starts)
+            df = amplpy.DataFrame('depart')
+            df.setColumn(self,'depart')
+            ampl.setData(df, departs)
 
-            df = amplpy.DataFrame('end')
-            df.setColumn(self,'end')
-            ampl.setData(df, ends)
+            df = amplpy.DataFrame('arrivee')
+            df.setColumn(self,'arrivee')
+            ampl.setData(df, arrivees)
 
-            df = amplpy.DataFrame(('start','end'), 'dst')
+            df = amplpy.DataFrame(('depart','arrivee'), 'dst')
 
             df.setValues({
-                (start, end): self.matrice[i][j]
-                for i, start in enumerate(starts)
-                for j, end in enumerate(ends)})
+                (depart, arrivee): self.matrice[i][j]
+                for i, depart in enumerate(departs)
+                for j, arrivee in enumerate(arrivees)})
 
             ampl.setData(self, df)
             ampl.solve()
@@ -51,10 +50,6 @@ class FrpAmplMipSolver(solver.Solver):
             solution = ampl.getVariable('Buy').getValues()
             print('Solution retournée: \n' + str(solution))
 
-        except Exception as except:
-            print(except)
+        except Exception as error:
+            print(error)
             raise
-
-
-
-
