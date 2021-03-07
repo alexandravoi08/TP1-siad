@@ -1,0 +1,9 @@
+set D := depart1 depart2 depart3 depart4;
+set A := arrivee1 arrivee2 arrivee3 arrivee4;
+set C := chemin1 chemin2 chemin3;
+
+param X :   arrivee1 arrivee2 arrivee3 arrivee4 :=
+   depart1     0       20       30       40
+   depart2    20        0       30        5
+   depart3    30       30        0       10
+   depart4    40        5       10        0     ;

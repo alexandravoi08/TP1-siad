@@ -1,0 +1,6 @@
+reset;
+option solver gurobi;
+model ampl_m.mod;
+data ampl_d.dat;
+solve;
+display Y;
